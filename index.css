@@ -1,0 +1,78 @@
+/* Se cambia el color de fondo*/
+body {
+    background-color: #f4f6f9;
+    margin: auto;
+}
+
+/* Se inicia la creacion del Menu navbar */
+
+.logoBanco {
+    width: 250px;
+}
+
+/*Se adicona style al menú*/
+
+.navbar-left ul {
+    list-style: none;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-left {
+    display: flex;
+}
+
+.navbar-left ul li a {
+    text-decoration: none;
+    color: black;
+    border: 1px solid #f4f6f9;
+    padding: 8px;
+    border-radius: 8px;
+}
+
+.navbar-left ul li a:hover,
+.hover {
+    border: 1px solid #9be5aa;
+    color: #9be5aa;
+}
+
+.active {
+    border: 1px solid #9be5aa !important;
+    color: #9be5aa !important;
+}
+
+hr {
+    margin: 0.5 rem;
+    opacity: 0.7;
+}
+
+.input-group {
+    width: 50%
+}
+
+.card {
+    background-color: #012e65;
+}
+
+.cardUser {
+    box-shadow: 0 4px 10px rgb(0 0 0 / 3%) !important;
+    background: white;
+    border-radius: var(--border-radius-lg);
+    --border-radius-lg: 16px;
+    border: initial;
+    padding: 10%;
+}
+
+.cardH {
+    font-size: 2rem;
+    margin-bottom: .5rem;
+}
+
+.cardB {
+    display: flex;
+    justify-content: center;
+    font-size: 1.5rem;
+    border-radius: 1rem;
+
+}
