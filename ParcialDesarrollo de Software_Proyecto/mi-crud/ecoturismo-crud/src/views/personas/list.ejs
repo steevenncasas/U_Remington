@@ -1,0 +1,147 @@
+<%- include("../partials/head") %>
+<% if (!isRegister) { %>
+  <%- include("../partials/navbar") %>
+<% } %>
+<%- include("../partials/alerts") %>
+
+<div class="container py-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="h4 m-0"><%= isRegister ? 'Registrarse (Gestión Persona)' : 'Gestión Persona' %></h2>
+    <div class="d-flex gap-2">
+      <a class="btn btn-success" style="background:#2f5b2f;" href="/personas/nuevo<%= isRegister ? '?register=1' : '' %>">Crear</a>
+      <a class="btn btn-secondary" href="<%= isRegister ? '/login' : '/' %>">Salir</a>
+    </div>
+  </div>
+
+  <div class="row g-3">
+    <div class="col-lg-12">
+      <div class="card shadow-sm">
+        <div class="card-header fw-semibold">Personas</div>
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table table-striped mb-0">
+              <thead class="table-light">
+                <tr>
+                  <th>ID</th>
+                  <th>Nombres</th>
+                  <th>Apellidos</th>
+                  <th>Dirección</th>
+                  <th>Tel</th>
+                  <th>Móvil</th>
+                  <th>Correo</th>
+                  <th>Fecha Nac</th>
+                  <th>Estado</th>
+                  <th style="width:220px;">Editar</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% personas.forEach(p => { %>
+                  <tr>
+                    <td><%= p.idpersona %></td>
+                    <td><%= [p.nom1, p.nom2].filter(Boolean).join(' ') %></td>
+                    <td><%= [p.apel1, p.apel2].filter(Boolean).join(' ') %></td>
+                    <td><%= p.direccion || '' %></td>
+                    <td><%= p.tele || '' %></td>
+                    <td><%= p.movil || '' %></td>
+                    <td><%= p.correo %></td>
+                    <td><%= p.fecha_nac ? String(p.fecha_nac).slice(0,10) : '' %></td>
+                    <td>
+                      <span class="badge <%= p.estado === 'Activo' ? 'bg-success' : 'bg-secondary' %>"><%= p.estado %></span>
+                    </td>
+                    <td class="d-flex gap-2">
+                      <a class="btn btn-sm btn-outline-dark" href="/personas/<%= p.idpersona %>/editar">Modificar</a>
+                      <form method="post" action="/personas/<%= p.idpersona %>/inhabilitar" onsubmit="return confirm('¿Inhabilitar persona?')">
+                        <button class="btn btn-sm btn-outline-danger" <%= p.estado === 'Inactivo' ? 'disabled' : '' %>>Inhabilitar</button>
+                      </form>
+                    </td>
+                  </tr>
+                <% }) %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-12">
+      <div class="card shadow-sm mt-3">
+        <div class="card-header fw-semibold"><%= edit && edit.idpersona ? 'Modificar' : 'Guardar' %></div>
+        <div class="card-body">
+          <% if (!edit) { %>
+            <p class="text-muted">Presiona <b>Crear</b> o <b>Modificar</b>.</p>
+          <% } else { %>
+            <form method="post" action="<%= edit.idpersona ? ('/personas/' + edit.idpersona + '?_method=PUT') : ('/personas' + (isRegister ? '?register=1' : '')) %>" class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">Primer Nombre</label>
+                <input name="nom1" class="form-control" value="<%= edit.nom1 %>" />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Segundo Nombre</label>
+                <input name="nom2" class="form-control" value="<%= edit.nom2 || '' %>" />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Primer Apellido</label>
+                <input name="apel1" class="form-control" value="<%= edit.apel1 %>" />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Segundo Apellido</label>
+                <input name="apel2" class="form-control" value="<%= edit.apel2 || '' %>" />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Celular</label>
+                <input name="movil" class="form-control" value="<%= edit.movil || '' %>" />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Dirección</label>
+                <input name="direccion" class="form-control" value="<%= edit.direccion || '' %>" />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Teléfono</label>
+                <input name="tele" class="form-control" value="<%= edit.tele || '' %>" />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Correo</label>
+                <input name="correo" class="form-control" value="<%= edit.correo %>" />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Fecha de Nacimiento</label>
+                <input name="fecha_nac" type="date" class="form-control" value="<%= edit.fecha_nac ? String(edit.fecha_nac).slice(0,10) : '' %>" />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Estado</label>
+                <select name="estado" class="form-select">
+                  <option value="Activo" <%= edit.estado === 'Activo' ? 'selected' : '' %>>Activo</option>
+                  <option value="Inactivo" <%= edit.estado === 'Inactivo' ? 'selected' : '' %>>Inactivo</option>
+                </select>
+              </div>
+
+              <% if (isRegister && !edit.idpersona) { %>
+                <hr class="my-2">
+                <div class="col-12">
+                  <h6 class="mb-2">Crear usuario para ingreso</h6>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Usuario</label>
+                  <input name="username" class="form-control" placeholder="Ej: steven123" />
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Contraseña</label>
+                  <input name="password" type="password" class="form-control" placeholder="Cree una contraseña" />
+                </div>
+              <% } %>
+
+              <div class="col-12 d-grid gap-2">
+                <button class="btn btn-success" style="background:#2f5b2f;">
+                  <%= edit.idpersona ? 'Actualizar' : (isRegister ? 'Registrarme' : 'Guardar Persona') %>
+                </button>
+                <a class="btn btn-secondary" href="<%= isRegister ? '/login' : '/personas' %>">Cancelar</a>
+              </div>
+            </form>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include("../partials/footer") %>

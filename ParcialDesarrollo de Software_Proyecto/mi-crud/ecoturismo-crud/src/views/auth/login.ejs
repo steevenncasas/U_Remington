@@ -1,0 +1,39 @@
+<%- include("../partials/head") %>
+
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+      <div class="card shadow-sm">
+        <div class="card-header text-white fw-semibold" style="background:#2f5b2f;">
+          Acceso al Sistema
+        </div>
+        <div class="card-body">
+          <form method="post" action="/login" class="vstack gap-3">
+            <div>
+              <label class="form-label">Usuario</label>
+              <input name="username" class="form-control" placeholder="Digite su usuario" />
+            </div>
+            <div>
+              <label class="form-label">Contraseña</label>
+              <input name="password" type="password" class="form-control" placeholder="Digite su contraseña" />
+            </div>
+
+            <div class="d-grid gap-2">
+              <button class="btn btn-success" style="background:#2f5b2f;">Ingresar</button>
+              <button type="reset" class="btn btn-secondary">Cancelar</button>
+            </div>
+
+            <div class="d-flex justify-content-between small">
+              <a href="/recuperar">Recuperar (usuario/contraseña)</a>
+              <a href="/register">Registrarse</a>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <%- include("../partials/alerts") %>
+    </div>
+  </div>
+</div>
+
+<%- include("../partials/footer") %>

@@ -1,0 +1,29 @@
+<nav class="navbar navbar-expand-lg navbar-dark" style="background:#2f5b2f;">
+  <div class="container">
+    <a class="navbar-brand fw-semibold" href="/">Ecoturismo - EL Canto Cipriano</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="nav">
+      <% if (currentUser) { %>
+      <ul class="navbar-nav ms-auto gap-2">
+        <li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Gestión</a>
+          <ul class="dropdown-menu">
+            <% if (currentUser.perfil === "Administrador") { %>
+              <li><a class="dropdown-item" href="/usuarios">Usuarios</a></li>
+              <li><a class="dropdown-item" href="/perfiles">Perfiles</a></li>
+            <% } %>
+            <li><a class="dropdown-item" href="/personas">Personas</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item"><a class="nav-link" href="/logout">Salir</a></li>
+      </ul>
+      <% } %>
+    </div>
+  </div>
+</nav>

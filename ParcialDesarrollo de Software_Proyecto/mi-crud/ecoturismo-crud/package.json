@@ -1,0 +1,27 @@
+{
+  "name": "ecoturismo-crud",
+  "version": "1.0.0",
+  "description": "CRUD Perfiles, Personas, Usuarios + Login/Recuperación (Ing. Software 3) - Node.js, Express, MySQL, Bootstrap",
+  "main": "src/server.js",
+  "type": "commonjs",
+  "scripts": {
+    "dev": "nodemon src/server.js",
+    "start": "node src/server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "connect-flash": "^0.1.1",
+    "dotenv": "^16.6.1",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "express-session": "^1.17.3",
+    "express-validator": "^7.2.0",
+    "method-override": "^3.0.0",
+    "morgan": "^1.10.0",
+    "mysql2": "^3.11.0",
+    "nodemailer": "^6.9.14"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}
