@@ -1,0 +1,33 @@
+{
+  "name": "mi-crud",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "connect-flash": "^0.1.1",
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
+    "ejs": "^4.0.1",
+    "express": "^5.2.1",
+    "express-session": "^1.19.0",
+    "express-validator": "^7.3.1",
+    "method-override": "^3.0.0",
+    "morgan": "^1.10.1",
+    "mysql2": "^3.17.4",
+    "nodemailer": "^8.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  },
+  "scripts": {
+  "dev": "nodemon src/server.js",
+  "start": "node src/server.js"
+}
+}
